@@ -27,7 +27,8 @@ exports.signin = async(req,res) => {
             const compare = await bcrypt.compareSync(req.body.password,userdata.password)
             if(compare){
                 const token = generateToken(req.body)
-                  res.status(200).send(token);
+                  res.header({"token":token})
+                  res.status(200).send(token)
                 console.log("login succesfull",token)
             }else{
             res.sendStatus(403).send("Forbidden")
